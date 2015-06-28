@@ -1,1 +1,15 @@
-<%= board.title %>
+<%= board.get('title') %>
+
+<button type="button" class="delete-board btn btn-danger btn-xs">Delete Board</button>
+
+<div class="lists group"> </div>
+
+<div class="list-add">
+	<div class="list-add-content">
+		<input class="list-add-input" type="text" placeholder="Add a list..."> 
+		<div class="submit-cancel">
+			<button class="list-add-submit btn btn-success">Save</button>
+		</div>
+	</div>
+ </div>
+

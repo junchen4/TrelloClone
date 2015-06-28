@@ -1,0 +1,9 @@
+<div class="title-area">
+	<%= list.escape('title')%>
+</div>
+
+<div class="cards">
+  <% list.cards().each(function (card) { %>
+  <article> <%=card.escape('title')%></article>
+  <% }) %>
+</div>

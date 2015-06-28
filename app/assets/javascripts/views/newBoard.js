@@ -1,4 +1,4 @@
-TrelloClone.Views.NewBoard = Backbone.View.extend ({
+TrelloClone.Views.NewBoard = Backbone.CompositeView.extend ({
   tagName: 'form',
 
   className: 'new-board',
@@ -10,7 +10,7 @@ TrelloClone.Views.NewBoard = Backbone.View.extend ({
   },
 
   initialize: function () {
-    //this.listenTo(this.model, 'sync', this.render);
+    this.listenTo(this.model, 'sync', this.render);
   },
 
   render: function () {

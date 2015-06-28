@@ -1,4 +1,4 @@
-TrelloClone.Views.BoardsIndex = Backbone.View.extend({
+TrelloClone.Views.BoardsIndex = Backbone.CompositeView.extend({
   tagName: 'section',
   className: 'boards-index',
   template: JST['boardsIndex'],
