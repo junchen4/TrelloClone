@@ -1,90 +1,147 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require_self
- *= require jquery.ui.all
- *= require_tree .
- */
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+* or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the top of the
+* compiled file, but it's generally better to create a new file per style scope.
+*
+*= require_self
+*= require jquery.ui.all
+*= require_tree .
+*/
 
 @import "bootstrap";
 @import "font-awesome";
 
 
 
- /* --- ELEMENTS --- */
+/* --- ELEMENTS --- */
 body {
-  font-family: sans-serif;
-  font-size: 16px;
-  line-height: 1.1666666666666;
-  height: 100%;
-  background-color: rgba(0, 121, 191, 0.71);
+font-family: sans-serif;
+font-size: 16px;
+line-height: 1.1666666666666;
+height: 100%;
+background-color: rgba(0, 121, 191, 0.71);
 }
 
- ul {
-   list-style: none;
- }
+ul {
+ list-style: none;
+}
 
- img {
-   display: block;
-   width: 100%;
-   height: auto;
- }
+img {
+ display: block;
+ width: 100%;
+ height: auto;
+}
 
- /* --- CLEARFIX --- */
+/* --- CLEARFIX --- */
 
- .group:after {
-   content: "";
-   clear: both;
-   display: block;
- }
+.group:after {
+ content: "";
+ clear: both;
+ display: block;
+}
 
- .list-add {
- 	background: #E2E4E6;
- 	width: 230px;
- 	display: inline-block;
- 	border-radius: 8px;
- 	
- }
+.hidden {
+display: none;
+}
 
- .list-add .list-add-content {
- 	margin: 8px auto;
- 	width: 200px;
- }
+/* Boards index page */
+.boards-index ul li a{
+color: white;
+}
 
-  .list-add .list-add-content .list-add-input {
- 	padding: 5px 3px;
- 	border-radius: 4px;
- }
+#sortable-lists, .list-add {
+  display: inline-block;
+}
 
- .list-add .list-add-content .submit-cancel{
- 	margin-top: 3px;
- }
 
- .list-show {
- 	background: #E2E4E6;
- 	border-radius: 8px;
- 	width: 230px;
- 	display: inline-block;
- 	float: left;
- }
+.list-add {
+	background: #E2E4E6;
+	width: 230px;
+	display: inline-block;
+	border-radius: 8px;
+	
+}
 
- .list-show .title-area {
- 	margin: 0 auto;
- 	width: 200px;
- }
+.list-add .list-add-content {
+	margin: 8px auto;
+	width: 200px;
+}
 
- .list-show .cards {
- 	margin: 0 auto;
- 	width: 200px;
- 	background: white;
- }
+.list-add .list-add-content .list-add-input {
+	padding: 5px 3px;
+	border-radius: 4px;
+}
+
+.list-add .list-add-content .submit-cancel{
+	margin-top: 3px;
+}
+
+.list-show {
+	background: #E2E4E6;
+	border-radius: 8px;
+	width: 230px;
+	display: inline-block;
+	float: left;
+  margin-right: 15px;
+  margin-bottom: 25px;
+}
+
+.list-show .title-area {
+	margin: 0 auto;
+	width: 200px;
+  color: #4d4d4d;
+  font-weight: bold;
+}
+
+.list-show .title-area span.remove-list {
+  float: right;
+}
+
+.list-show .title-area span.remove-list:hover {
+  cursor: pointer;
+}
+
+.list-show .cards {
+	margin: 0 auto;
+	width: 200px;
+	background: #E2E4E6;
+}
+
+.list-show .cards article {  
+  background: #FDFFFD;
+  padding: 3px;
+}
+
+.list-show .cards article:not(:last-child) {
+  margin-bottom: 6px;
+}
+
+.list-show .cards span.remove-card:hover {
+  cursor: pointer;
+}
+
+.list-show .remove-card {
+  display: inline-block;
+  float: right;
+}
+
+.list-show .add-card-area {
+  padding-top: 8px;
+  background: #E2E4E6;
+}
+
+.list-show .add-card-area a:hover {
+  cursor: pointer;
+}
+
+.list-show .add-card-area span:hover {
+  cursor: pointer;
+}
 
 
 

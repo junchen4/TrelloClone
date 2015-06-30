@@ -1,6 +1,8 @@
+require 'byebug'
+
 module Api
   class ListsController < ApiController
-    before_action :require_board_member!
+    before_action :require_board_member!, except: :update_order
 
     def create
       @list = current_board.lists.new(list_params)
@@ -26,6 +28,15 @@ module Api
       else
         render json: @list.errors.full_messages, status: :unprocessable_entity
       end
+    end
+
+    def update_order      
+      list_array = params[:listID]
+      list_array.each_with_index do |id, order|
+        @list = List.find(id.to_i)
+        @list.update_attributes({ord: order})
+      end
+      render json: list_array
     end
 
     private

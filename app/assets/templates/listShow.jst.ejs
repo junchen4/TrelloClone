@@ -1,9 +1,36 @@
-<div class="title-area">
+<div class="title-area group">
 	<%= list.escape('title')%>
+	<span class="remove-list glyphicon glyphicon-remove"></span>
 </div>
 
 <div class="cards">
-  <% list.cards().each(function (card) { %>
-  <article> <%=card.escape('title')%></article>
-  <% }) %>
+	<div id="sortable-cards" class="card-list-area">
+	</div>
+
+  <div class="add-card-area">
+  	<a>Add a card...</a>
+  	<form class="hidden">
+  		<textarea></textarea>
+		<button class="card-add-submit btn btn-success">Add</button>
+		<span class="glyphicon glyphicon-remove"></span>
+  	</form>
+  </div>
 </div>
+
+<script>
+  $(function() {
+    $( "#sortable-cards" ).sortable({
+    	update: function (event, ui) {  
+    	   var index = ui.item.index();
+    	   ui.item.trigger('dropCard', [ui.item.data('id'), index]);
+	       var data = $(this).sortable('serialize');
+	       $.ajax({
+	            data: data+"&authenticity_token="+AUTH_TOKEN,
+	            type: 'PATCH',
+	            url: '/api/cards/update_order'
+	        });	    
+	   }
+    });
+    $( "#sortable-cards" ).disableSelection();
+  });
+</script>

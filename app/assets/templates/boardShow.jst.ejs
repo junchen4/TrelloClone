@@ -1,15 +1,37 @@
-<%= board.get('title') %>
+<div class="title-area">
+	<%= board.get('title') %>
 
-<button type="button" class="delete-board btn btn-danger btn-xs">Delete Board</button>
+	<button type="button" class="delete-board btn btn-danger btn-xs">Delete Board</button>
+</div>
 
-<div class="lists group"> </div>
-
-<div class="list-add">
-	<div class="list-add-content">
-		<input class="list-add-input" type="text" placeholder="Add a list..."> 
-		<div class="submit-cancel">
-			<button class="list-add-submit btn btn-success">Save</button>
+<div id="sortable-lists" class="lists group"> 
+	<div class="list-add">
+		<div class="list-add-content">
+			<input class="list-add-input" type="text" placeholder="Add a list..."> 
+			<div class="submit-cancel">
+				<button class="list-add-submit btn btn-success">Save</button>
+			</div>
 		</div>
-	</div>
- </div>
+	 </div>
+</div>
 
+
+
+<script>
+  $(function() {
+    $( "#sortable-lists" ).sortable({
+	    update: function (event, ui) {
+	        var data = $(this).sortable('serialize');
+	        var index = ui.item.index();
+
+    	    ui.item.trigger('dropList', [ui.item.data('id'), index]);
+	       $.ajax({
+	            data: data+"&authenticity_token="+AUTH_TOKEN,
+	            type: 'PATCH',
+	            url: '/api/lists/update_order'
+	        });	    
+	   }
+    });
+    $( "#sortable-lists" ).disableSelection();
+  });
+</script>

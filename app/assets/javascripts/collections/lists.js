@@ -4,8 +4,7 @@ TrelloClone.Collections.Lists = Backbone.Collection.extend({
   model: TrelloClone.Models.List,
 
   comparator: function(model) {
-    console.log("comapring list");
-    return model.get('ord');
+    return -model.get('ord');
   },
 
   initialize: function(models, options) {
