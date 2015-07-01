@@ -11,6 +11,13 @@
 	  <%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery? %>
 	</head>
 	<body>
+	  <div class="overlay hidden">
+	  	<div class="confirm-board-remove">
+	  		<div class="text-confirm-area">Would you really like to delete this board?</div>
+			<button type="button" class="confirm-delete-board btn btn-danger btn-md">Yes</button>
+			<button type="button" class="confirm-no-delete-board btn btn-success btn-md">No</button>
+	  	</div>
+	  </div>
 	  <%= render partial: "layouts/header" %>
 	  <%= yield %>
 	</body>

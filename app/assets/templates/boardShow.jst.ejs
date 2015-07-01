@@ -1,5 +1,5 @@
 <div class="title-area">
-	<%= board.get('title') %>
+	<%= board.escape('title') %>
 
 	<button type="button" class="delete-board btn btn-danger btn-xs">Delete Board</button>
 </div>
@@ -15,11 +15,27 @@
 	 </div>
 </div>
 
+<div class="add-board-member"> 
+	<header>Add Board Member</header>
+	<input class="add-member" type="text" placeholder="Add an email..."> 
+	<button class="add-member-submit btn btn-success">Add</button>
+</div>
+
 
 
 <script>
   $(function() {
     $( "#sortable-lists" ).sortable({
+    	start: function (event, ui) {
+    		// ui.item.toggleClass('dragged');
+    		ui.helper.toggleClass('dragged');
+    	},
+
+    	stop: function (event, ui) {
+    		// ui.item.toggleClass('dragged');
+    		ui.helper.toggleClass('dragged');
+    	},
+
 	    update: function (event, ui) {
 	        var data = $(this).sortable('serialize');
 	        var index = ui.item.index();

@@ -13,6 +13,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def find_by_email
+    @user = User.where(email: params[:email])
+    render json: @user
+  end
+
   private
 
   def user_params

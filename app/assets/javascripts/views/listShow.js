@@ -28,6 +28,10 @@ TrelloClone.Views.ListShow = Backbone.CompositeView.extend({
     var content = this.template({list: this.model});
     this.$el.html(content);
     this.renderCards();
+
+    //Bind because the form element is initially hidden (display: none)
+    this.$('.add-card-area').on('mouseover', 'form', this.toggleRemoveCard.bind(this));
+    this.$('.add-card-area').on('mouseout', 'form', this.toggleRemoveCard.bind(this));
     return this;
   },
 
@@ -45,28 +49,30 @@ TrelloClone.Views.ListShow = Backbone.CompositeView.extend({
 
   toggleAddCard: function (event) {
     event.preventDefault();
-    this.$('.add-card-area a').toggleClass('hidden');
-    this.$('.add-card-area form').toggleClass('hidden');
+    this.$('.add-card-area a').removeClass('hidden');
+    this.$('.add-card-area form').removeClass('hidden');
   },
 
   addCard: function (event) {
     event.preventDefault();
-
     var cardTitle = this.$("textarea").val();
-    var ordArray = this.model.cards().pluck("ord");
-    var maxOrd = Math.max.apply(null, ordArray);
-    if (this.model.cards().length != 0) {
-      var newOrd = maxOrd + 1;
+    if (cardTitle == "") {
+      this.$("textarea").effect("highlight", {}, 1000);
     } else {
-      var newOrd = 0;
+      var ordArray = this.model.cards().pluck("ord");
+      var maxOrd = Math.max.apply(null, ordArray);
+      if (this.model.cards().length != 0) {
+        var newOrd = maxOrd + 1;
+      } else {
+        var newOrd = 0;
+      }
+      var card = new TrelloClone.Models.Card({"list_id": this.model.get('id'), "title": cardTitle, "ord": newOrd});
+      card.save({}, {
+        success: function () {
+          this.model.cards().add(card, {merge: true});
+        }.bind(this)
+      }); 
     }
-
-    var card = new TrelloClone.Models.Card({"list_id": this.model.get('id'), "title": cardTitle, "ord": newOrd});
-    card.save({}, {
-      success: function () {
-        this.model.cards().add(card, {merge: true});
-      }.bind(this)
-    }); 
   },
 
   removeCard: function (event) {

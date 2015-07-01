@@ -1,7 +1,9 @@
 TrelloClone::Application.routes.draw do
   root to: 'static_pages#root'
 
-  resources :users
+  resources :users do
+    get 'find_by_email', :on => :collection
+  end
   resource :session
 
   namespace :api, defaults: { format: :json } do
@@ -14,7 +16,7 @@ TrelloClone::Application.routes.draw do
     end
 
     # resources :items
-    # resources :board_memberships
+    resources :board_memberships, only: :create
     # resources :card_assignments
   end
 end

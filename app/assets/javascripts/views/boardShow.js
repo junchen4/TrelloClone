@@ -7,14 +7,15 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
 
   events: {
   	"click .list-add-submit": "submitList",
-  	"click button.delete-board": "deleteBoard",
-    'dropList': 'dropList'
+  	"click button.delete-board": "displayDeleteBoardModal",
+    'dropList': 'dropList', 
+    "click button.add-member-submit": "submitMember"
   },
 
   initialize: function () {
   	this.listenTo(this.model, 'sync', this.render);
-  	this.listenTo(this.model.lists(), 'sync add remove sort', this.renderLists);  	
-  },
+  	this.listenTo(this.model.lists(), 'sync add remove sort', this.renderLists);
+ },
 
   render: function () {
     var content = this.template({board: this.model});
@@ -38,31 +39,50 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
   submitList: function (event) {
   	event.preventDefault();
 
-  	var listName = this.$("input").val();
-    var ordArray = this.model.lists().pluck("ord");
-    var maxOrd = Math.max.apply(null, ordArray);
-    if (this.model.lists().length != 0) {
-      var newOrd = maxOrd + 1;
+  	var listName = this.$("input.list-add-input").val();
+    if (listName == "") {
+      this.$("input.list-add-input").effect("highlight", {}, 1000);
     } else {
-      var newOrd = 0;
-    }
+      var ordArray = this.model.lists().pluck("ord");
+      var maxOrd = Math.max.apply(null, ordArray);
+      if (this.model.lists().length != 0) {
+        var newOrd = maxOrd + 1;
+      } else {
+        var newOrd = 0;
+      }
 
-  	var list = new TrelloClone.Models.List({"board_id": this.model.get('id'), "title": listName, "ord": newOrd});
-  	list.save({}, {
-  		success: function () {
-  			this.model.lists().add(list, {merge: true});
-  		}.bind(this)
-  	});	
+    	var list = new TrelloClone.Models.List({"board_id": this.model.get('id'), "title": listName, "ord": newOrd});
+    	list.save({}, {
+    		success: function () {
+    			this.model.lists().add(list, {merge: true});
+    		}.bind(this)
+    	});	
+    }
   },
 
-  deleteBoard: function (event) {
+  displayDeleteBoardModal: function (event) {
   	event.preventDefault();
-  	this.model.destroy({
-  		success: function () {
-  			TrelloClone.Collections.boards.remove(this.model);
-        	Backbone.history.navigate("", {trigger: true});
-  		}.bind(this)
-  	})
+    $('body .overlay').toggleClass('hidden');
+    $('body .overlay .confirm-board-remove button.confirm-delete-board').on('click', this.deleteBoard.bind(this));
+    $('body .overlay .confirm-board-remove button.confirm-no-delete-board').on('click', this.rejectDeleteBoard.bind(this));   
+},
+
+  deleteBoard: function (event) {
+    event.preventDefault();
+    this.model.destroy({
+      success: function () {
+        TrelloClone.Collections.boards.remove(this.model);
+        $('body .overlay').addClass('hidden');
+        $('body .overlay .confirm-board-remove button.confirm-delete-board').unbind("click");
+        Backbone.history.navigate("", {trigger: true});
+      }.bind(this)
+    })
+  },
+
+  rejectDeleteBoard: function (event) {
+    event.preventDefault();
+    $('body .overlay').addClass('hidden');
+    $('body .overlay .confirm-board-remove button.confirm-no-delete-board').unbind("click");
   },
 
   dropList: function(event, listID, position) {
@@ -81,6 +101,20 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
     model.set('ord', position);
     this.model.lists().add(model, {at: arrayPosition, silent: true});
     this.model.lists().sort();
+  },
+
+  submitMember: function (event) {
+    var email = this.$('input.add-member').val();
+
+     $.ajax({
+          data: {board_membership: {email: email, board_id: this.model.get('id')}},
+          type: 'POST',
+          url: '/api/board_memberships',
+          success: function(response) {
+            this.$(".add-board-member input.add-member").effect("highlight", {}, 1000);
+            console.log(response);
+          }.bind(this)
+      });  
   }
 
 });

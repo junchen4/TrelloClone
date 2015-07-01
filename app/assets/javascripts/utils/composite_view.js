@@ -13,7 +13,6 @@ Backbone.CompositeView = Backbone.View.extend({
 
   attachSubview: function (selector, subview, prepend) {
     if(prepend) {
-      console.log("inside subview",this.$(selector));
       this.$(selector).prepend(subview.$el);
     }
     else {
