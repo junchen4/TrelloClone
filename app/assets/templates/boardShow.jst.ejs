@@ -19,6 +19,14 @@
 	<header>Add Board Member</header>
 	<input class="add-member" type="text" placeholder="Add an email..."> 
 	<button class="add-member-submit btn btn-success">Add</button>
+	<div class="board-members">
+			<% board.members().forEach(function (member) { %>
+				<article>
+					<%=member.get('email')%> 
+					<span class="remove-member glyphicon glyphicon-remove" data-member-id="<%=member.escape('id')%>"></span>
+				</article>
+			<% }) %>
+	</div>
 </div>
 
 
@@ -28,12 +36,12 @@
     $( "#sortable-lists" ).sortable({
     	start: function (event, ui) {
     		// ui.item.toggleClass('dragged');
-    		ui.helper.toggleClass('dragged');
+    		ui.item.toggleClass('dragged');
     	},
 
     	stop: function (event, ui) {
     		// ui.item.toggleClass('dragged');
-    		ui.helper.toggleClass('dragged');
+    		ui.item.toggleClass('dragged');
     	},
 
 	    update: function (event, ui) {

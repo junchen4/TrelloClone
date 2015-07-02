@@ -76,6 +76,19 @@ display: none;
   display: inline-block;
 }
 
+.board-show .add-board-member button.add-member-submit {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.board-show .add-board-member .board-members article{
+  margin-bottom: 5px;
+}
+
+.board-show .add-board-member .board-members article span.remove-member:hover {
+  cursor: pointer;
+}
+
 /*Lists*/
 
 .list-add {
@@ -167,7 +180,7 @@ display: none;
   transform: rotate(3deg);
 }
 
-.overlay {
+.overlay, .card-overlay {
   width: 100%;
   height: 1000px;
   z-index: 100;
@@ -192,5 +205,17 @@ display: none;
 
 .confirm-board-remove button.confirm-delete-board {
   margin-right: 20px;
+}
+
+/*Card modal*/
+.card-show {
+  position: fixed;
+  text-align: center;
+  left: 32%;
+  top: 31%;
+  background: whitesmoke;
+  padding: 30px;
+  font-size: 20px;
+  border-radius: 7px;
 }
 

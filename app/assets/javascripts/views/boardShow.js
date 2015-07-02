@@ -9,12 +9,14 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
   	"click .list-add-submit": "submitList",
   	"click button.delete-board": "displayDeleteBoardModal",
     'dropList': 'dropList', 
-    "click button.add-member-submit": "submitMember"
+    "click button.add-member-submit": "submitMember",
+    "click span.remove-member": "removeMember"
   },
 
   initialize: function () {
   	this.listenTo(this.model, 'sync', this.render);
   	this.listenTo(this.model.lists(), 'sync add remove sort', this.renderLists);
+    this.listenTo(this.model.members(), 'sync add remove sort', this.render);
  },
 
   render: function () {
@@ -111,10 +113,27 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
           type: 'POST',
           url: '/api/board_memberships',
           success: function(response) {
-            this.$(".add-board-member input.add-member").effect("highlight", {}, 1000);
-            console.log(response);
+            if (response == null) {
+              this.$(".add-board-member input.add-member").effect("highlight", {}, 1000);
+            } else {
+              var member = new TrelloClone.Models.Member({id: response.user_id, email: response.member.email});
+              this.model.members().add(member);
+            }
           }.bind(this)
       });  
+  },
+
+  removeMember: function (event) {
+    event.preventDefault();
+    var memberID = $(event.currentTarget).data('member-id');
+    var clickedModel = this.model.members().get(memberID);
+    this.model.members().remove(clickedModel);
+
+     $.ajax({
+        data: {board_membership: {user_id: memberID, board_id: this.model.get('id')}},
+        type: 'DELETE',
+        url: '/api/board_memberships/destroy' 
+     });  
   }
 
 });

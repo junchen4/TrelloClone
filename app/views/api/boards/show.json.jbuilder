@@ -10,3 +10,7 @@ json.lists @board.lists do |list|
 		json.extract! card, :id, :title, :description, :ord, :list_id
 	end
 end
+
+json.members @board.members do |member|
+	json.extract! member, :id, :email
+end

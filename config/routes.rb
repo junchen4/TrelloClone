@@ -16,7 +16,9 @@ TrelloClone::Application.routes.draw do
     end
 
     # resources :items
-    resources :board_memberships, only: :create
+    resources :board_memberships, only: :create do 
+      delete 'destroy', :on => :collection
+    end
     # resources :card_assignments
   end
 end
