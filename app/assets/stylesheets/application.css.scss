@@ -113,7 +113,12 @@ body button.demo-login {
   margin-bottom: 7px;
  }
 
-#sortable-lists, .list-add {
+
+#sortable-lists {
+  white-space: nowrap;
+}
+
+.list-add {
   display: inline-block;
 }
 
@@ -159,8 +164,8 @@ body button.demo-login {
 	border-radius: 8px;
 	width: 230px;
 	display: inline-block;
-	float: left;
-  margin-right: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
   margin-bottom: 25px;
 }
 
