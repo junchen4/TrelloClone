@@ -42,7 +42,7 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
   	event.preventDefault();
 
   	var listName = this.$("input.list-add-input").val();
-    if (listName == "") {
+    if (listName.length === 0 || !listName.trim()) {
       this.$("input.list-add-input").effect("highlight", {}, 1000);
     } else {
       var ordArray = this.model.lists().pluck("ord");
@@ -54,7 +54,7 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
       }
 
     	var list = new TrelloClone.Models.List({"board_id": this.model.get('id'), "title": listName, "ord": newOrd});
-    	list.save({}, {
+      list.save({}, {
     		success: function () {
     			this.model.lists().add(list, {merge: true});
     		}.bind(this)

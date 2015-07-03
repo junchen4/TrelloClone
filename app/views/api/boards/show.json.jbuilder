@@ -8,6 +8,9 @@ json.lists @board.lists do |list|
 
 	json.cards list.cards do |card|
 		json.extract! card, :id, :title, :description, :ord, :list_id
+			json.items card.items do |item|
+				json.extract! item, :id, :title, :done
+			end
 	end
 end
 

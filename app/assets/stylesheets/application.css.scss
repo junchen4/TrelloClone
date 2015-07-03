@@ -49,9 +49,50 @@ img {
 display: none;
 }
 
+.done {
+  text-decoration: line-through;
+}
+
+body > form, body > h1 {
+  margin: 0 auto;
+  width: 300px;
+  margin-top: 10px;
+}
+
+body button.demo-login {
+  position: relative;
+  left: 578px;
+  bottom: 34px;
+}
+
 /* Boards index page */
+.boards-index {
+  margin: 0 auto;
+  width: 200px;
+}
+
+.boards-index header {
+  text-align: center;
+  font-size: 35px;
+  font-weight: 600;
+}
+
 .boards-index ul li a{
   color: white;
+  font-size: 25px;
+}
+
+.boards-index ul {
+  text-align: center;
+}
+
+.boards-index ul li {
+  margin-bottom: 10px;
+}
+
+.board-show {
+  position: absolute;
+  left: 10px;
 }
 
 .board-show > .title-area {
@@ -138,6 +179,8 @@ display: none;
   cursor: pointer;
 }
 
+/*Cards*/
+
 .list-show .cards {
 	margin: 0 auto;
 	width: 200px;
@@ -147,6 +190,11 @@ display: none;
 .list-show .cards article {  
   background: #FDFFFD;
   padding: 3px;
+}
+
+.list-show .cards article:hover {  
+  cursor: pointer;
+  background: rgba(211, 211, 211, 0.71);
 }
 
 .list-show .cards article:not(:last-child) {
@@ -210,12 +258,59 @@ display: none;
 /*Card modal*/
 .card-show {
   position: fixed;
-  text-align: center;
-  left: 32%;
-  top: 31%;
+  width: 400px;
+  min-height: 100px;
+  max-height: 600px;
+  right: 0;
+  top: 30%;
+  left: 31%;
+  overflow-y: scroll;
   background: whitesmoke;
-  padding: 30px;
+  border-radius: 4px;
+}
+
+.card-show span.hide-card-modal {
+  position: absolute;
+  left: 360px;
+}
+
+.card-show .title-area {
+  width: 150px;
+  margin: 0 auto;
+  text-align: center;
   font-size: 20px;
-  border-radius: 7px;
+  font-weight: 700;
+}
+
+.card-show span.hide-card-modal:hover {
+  cursor: pointer;
+}
+
+.card-show .add-item-area {
+  width: 200px;
+  margin: 0 auto;
+  margin-top: 15px;
+  padding-bottom: 5px;
+}
+
+.card-show article {
+  width: 300px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  background: white;
+  padding: 6px;
+  word-wrap: break-word;
+}
+
+.card-show .remove-item {
+  float: right;
+}
+
+.card-show .toggle-done {
+  margin-left: 5px;
+}
+
+.card-show .toggle-done:hover {
+  cursor: pointer;
 }
 

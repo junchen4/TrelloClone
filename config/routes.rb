@@ -15,7 +15,7 @@ TrelloClone::Application.routes.draw do
       patch 'update_order', :on => :collection
     end
 
-    # resources :items
+    resources :items, only: [:index, :create, :update, :destroy]
     resources :board_memberships, only: :create do 
       delete 'destroy', :on => :collection
     end

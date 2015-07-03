@@ -3,10 +3,32 @@
 <form action="/session" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <label>Email<br>
-    <input name="user[email]" type="text"><br>
+    <input name="user[email]" class="email" type="text"><br>
   </label><br>
   <label>Password<br>
-    <input name="user[password]" type="password"><br>
+    <input name="user[password]" class="password" type="password"><br>
   </label><br>
-  <input type="submit" value="Submit" class="btn btn-primary"><br>
+  <input type="submit" value="Submit" class="submit btn btn-primary"><br>
 </form>
+ <button onclick="demoLogin()" class="demo-login btn btn-success">Demo Login</button><br>
+
+
+<script>
+var demoLogin = function () {
+    $(function () {
+      $(".email").typed({
+        strings: ["jun@jun.com"],
+        typeSpeed: 100,
+        callback: function () {
+          $(".password").typed({
+            strings: ["password"],
+            typeSpeed: 20,
+            callback: function () {
+              $('input.submit').click()
+            }
+          });
+        }
+      });
+    });
+  }
+</script>

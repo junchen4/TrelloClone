@@ -39,7 +39,7 @@ TrelloClone.Views.ListShow = Backbone.CompositeView.extend({
   renderCards: function () {
     this.$('.card-list-area').empty();
     this.model.cards().each(function (card) {
-      this.$el.find('.card-list-area').append("<article id=cardID_"+card.get('id')+" data-id="+card.get('id')+" class=group>"+card.escape('title')+"<span class='remove-card hidden glyphicon glyphicon-remove' data-sort="+card.get('id')+"></span> </article>"); 
+      this.$('.card-list-area').append("<article id=cardID_"+card.get('id')+" data-id="+card.get('id')+" class=group>"+card.escape('title')+"<span class='remove-card hidden glyphicon glyphicon-remove' data-sort="+card.get('id')+"></span> </article>"); 
     }.bind(this));
   },
 
