@@ -83,7 +83,7 @@ body button.demo-login {
 }
 
 .boards-index ul {
-  text-align: center;
+  margin-top: 10px;
 }
 
 .boards-index ul li {
@@ -142,7 +142,8 @@ body button.demo-login {
 	width: 230px;
 	display: inline-block;
 	border-radius: 8px;
-	
+	position: relative;
+  bottom: 16px;
 }
 
 .list-add .list-add-content {
