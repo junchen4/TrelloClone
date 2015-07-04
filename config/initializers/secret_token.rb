@@ -1,0 +1,2 @@
+TrelloClone::Application.config.secret_key_base = ENV['5cca93b494a34c5769f13dab8c5c3d0db5b82b3ee3f00d2c9996f5564cab32a8ceff1f1dbb594721
+45a559576e4855718c0a7688f13be829f3a48ec5b3d2a842']
