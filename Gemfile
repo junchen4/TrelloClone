@@ -6,7 +6,6 @@ gem 'bootstrap-sass'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
 gem 'jbuilder', '~> 1.2'
 gem 'rails', '4.0.2'
 gem 'sass-rails', '~> 4.0.0'
@@ -17,6 +16,10 @@ gem 'figaro'
 
 group :production do
   gem 'rails_12factor'
+end
+
+group :assets do
+	gem 'jquery-ui-rails'
 end
 
 group :doc do
