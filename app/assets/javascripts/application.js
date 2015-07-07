@@ -13,10 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.serializeJSON
+//= require bootstrap
 //= require jquery-ui
 //= require underscore
 //= require backbone
-//= require bootstrap
 //= require typed
 //= require trello_clone
 //= require_tree ../templates
